@@ -5,9 +5,7 @@
 - [ ] How to Backup & Restore etcd
 - [ ] How to Upgrade Cluster
 - [ ] Create Namespaces
-- [ ] Create Pod
-- [ ] Create Replica
-- [ ] Expose Service with port
+- [ ] Create Pod, Replica, Expose port
 ### RABC
 - [ ] Create Test User
 - [ ] Create Service Account
@@ -18,8 +16,7 @@
 - [ ] Create Deployment (Rolling Update & Rollback
 - [ ] Create Manual Scale
 - [ ] Create Auto Scale (HPA)
-- [ ] Create Label & Selector
-- [ ] Taint & Tolerations
+- [ ] Create Taint & Tolerations
 - [ ] Create Node Affinity
 - [ ] Create Resource Limits
 - [ ] Create Config Map
