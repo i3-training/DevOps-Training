@@ -53,3 +53,9 @@
 - [ ] Taint and Toleration
 - [ ] Resource (CPU, Memory) Request
 - [ ] Pod Toleration
+
+## Jenkins
+- [ ] Create Pipeline with Freestyle Job
+- [ ] Create Jenkins Template Engine
+- [ ] Create Pipeline with JenkinsFile
+- [ ] Running Pipeline DevOps end to end with JenkinsFile
