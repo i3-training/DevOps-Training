@@ -1,31 +1,16 @@
-kubectl scale Use Cases
+# kubectl scale Use Cases
 The kubectl scale command is used to change the number of running replicas inside Kubernetes deployment, replica set, replication controller, and stateful set objects. When you increase the replica count, Kubernetes will start new pods to scale up your service. Lowering the replica count will cause Kubernetes to gracefully terminate some pods, freeing up cluster resources.
 
 You can run kubectl scale to manually adjust your application’s replica count in response to changing service capacity requirements. Increased traffic loads can be handled by increasing the replica count, providing more application instances to serve user traffic. When the surge subsides, the number of replicas can be reduced. This helps keep your costs low by avoiding utilization of unneeded resources.
 
-Using kubectl
+# Using kubectl
 The most basic usage of kubectl scale looks like this:
 
 ```sh
 $ kubectl scale --replicas=3 deployment/demo-deployment
 Executing this command will adjust the deployment called demo-deployment so it has three running replicas. You can target a different kind of resource by substituting its name instead of deployment:
 ```
-
-# ReplicaSet
-```sh
-$ kubectl scale --replicas=3 rs/demo-replicaset
-```
-
-# ReplicationController
-```sh
-$ kubectl scale --replicas=3 rc/demo-replicationcontroller
-```
-
-# StatefulSet
-```sh
-$ kubectl scale --replicas=3 sts/demo-statefulset
-```
-Basic Scaling
+# Basic Scaling
 Now we’ll look at a complete example of using kubectl scale to scale a deployment. Here’s a YAML file defining a simple deployment:
 
 ```sh
@@ -101,7 +86,7 @@ demo-deployment-86897ddbb-tgvnw	1/1	Running	0	3m21s
 ```
 Kubernetes has marked two of the running pods for termination. This will reduce the running replica count down to the requested three pods. The pods selected for eviction are sent a SIGTERM signal and allowed to gracefully terminate. They’ll be removed from the pod list once they’ve stopped.
 
-Conditional Scaling
+# Conditional Scaling
 Sometimes you might want to scale a resource, but only if there’s a specific number of replicas already running. This avoids unintentional overwrites of previous scaling changes, such as those made by other users in your cluster.
 
 Include the --current-replicas flag in the command to use this behavior:
@@ -112,7 +97,7 @@ deployment.apps/demo-deployment scaled
 ```
 This example scales the demo-deployment deployment to five replicas, but only if there’s currently three replicas running. The --current-replicas value is always matched exactly; you can’t express a condition as “less than” or “greater than” a particular count.
 
-Scaling Multiple Resources
+# Scaling Multiple Resources
 The kubectl scale command can scale several resources at once when you supply more than one name as arguments. Each of the resources will be scaled to the same replica count set by the --replicas flag.
 
 ```sh 
@@ -138,3 +123,33 @@ $ kubectl scale --replicas=5 --selector=app-name=demo-app deployment
 deployment.apps/app scaled
 deployment.apps/database scaled
 ```
+# Alternatives to kubectl scale
+First change the spec.replicas field to your new desired replica count:
+
+```sh
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: demo-deployment
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: demo-app
+  template:
+    metadata:
+      labels:
+        app: demo-app
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:latest
+```
+Now repeat the kubectl apply command with the modified file:
+
+```sh
+$ kubectl apply -f demo-deployment.yaml
+```
+kubectl will automatically diff the changes and take action to evolve the state of your cluster towards what is declared in the file. This will result in pods being automatically created or terminated, so the number of running instances matches the spec.replicas field again.
+
+
