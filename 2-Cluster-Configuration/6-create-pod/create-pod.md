@@ -17,6 +17,10 @@ To create the Pod shown above, run the following command:
 ```sh
 kubectl apply -f https://k8s.io/examples/pods/simple-pod.yaml
 ```
+Alternatively, you can create Pod using below command:
+```sh
+kubectl run <insert-pod-name-here> --image=nginx
+```
 
 or another example can create pod with name alpine.yaml 
 ```sh
