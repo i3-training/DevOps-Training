@@ -101,12 +101,6 @@ demo-deployment-86897ddbb-tgvnw	1/1	Running	0	3m21s
 ```
 Kubernetes has marked two of the running pods for termination. This will reduce the running replica count down to the requested three pods. The pods selected for eviction are sent a SIGTERM signal and allowed to gracefully terminate. They’ll be removed from the pod list once they’ve stopped.
 
-
-Monitor Kubernetes Events in Real-Time
-Monitor the health of your cluster and troubleshoot issues faster with pre-built dashboards that just work.
-Learn More
-event dashboard
-
 Conditional Scaling
 Sometimes you might want to scale a resource, but only if there’s a specific number of replicas already running. This avoids unintentional overwrites of previous scaling changes, such as those made by other users in your cluster.
 
