@@ -15,8 +15,7 @@
 - [ ] Create Role Binding
 
 ## Workloads & Scheduling
-- [ ] Create Deployment
-- [ ] Test Rolling Update & Rollback Deployment
+- [ ] Create Deployment (Rolling Update & Rollback
 - [ ] Create Manual Scale
 - [ ] Create Auto Scale (HPA)
 - [ ] Create Label & Selector
