@@ -1,10 +1,3 @@
-1. Deploy a messaging pod using the redis:alpine image with the labels set to tier=msg.
-   - Pod Name: messaging
-   - Image: redis:alpine
-   - Labels: tier=msg
-
-2. Create a namespace named apx-x9984574.
-
 1. Create a new deployment called nginx-deploy, with image nginx:1.16 and 1 replica. Next upgrade the deployment to version 1.17 using rolling update.
    - Deployment : nginx-deploy. Image: nginx:1.16
    - Image: nginx:1.16
