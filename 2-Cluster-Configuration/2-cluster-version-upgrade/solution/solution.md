@@ -4,12 +4,6 @@ You can find a detailed description of the upgrade steps in the [offical Kuberne
 
 ## Upgrading the Control Plane Node
 
-Shell into the control plane node.
-
-```
-$ vagrant ssh kube-control-plane
-```
-
 First, check the nodes and their Kubernetes versions. You will see that all nodes run on version 1.22.0.
 
 ```
@@ -282,12 +276,6 @@ $ exit
 ```
 
 ## Upgrading the Worker Node
-
-Shell into the worker node.
-
-```
-$ vagrant ssh kube-worker-1
-```
 
 Upgrade kubeadm to version 1.23.4-00.
 
