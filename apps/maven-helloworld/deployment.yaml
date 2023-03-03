@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-world-maven-deployment # name of the deployment
+
+spec:
+  template: # pod defintion
+    metadata:
+      name: maven-hello-world # name of the pod
+      labels:
+        app: maven-hello-world
+        tier: frontend
+    spec:
+      containers:
+        - name: maven-hello-world
+          image: imransetiadi22/hello-world-maven:latest
+  replicas: 3
+  selector: # Mandatory, Select the pods which needs to be in the replicaset
+    matchLabels:
+      app: maven-hello-world
+      tier: frontend
