@@ -32,6 +32,7 @@
    - ClusterRoleBinding: pvviewer-role-binding
    - Pod: pvviewer
    - Pod configured to use ServiceAccount pvviewer ?
+  
    Run the below command for solution: 
 
      <details>
@@ -66,6 +67,7 @@
    - Effect = NoSchedule
    - pod 'dev-redis' (no tolerations) is not scheduled on node01?
    - Create a pod 'prod-redis' to run on node01
+
    Run the below command for solution: 
  
      <details>
