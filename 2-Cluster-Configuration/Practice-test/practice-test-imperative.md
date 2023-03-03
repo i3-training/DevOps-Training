@@ -29,10 +29,10 @@ Solutions for Practice Test - Imperative Commands
     </details>
 
 1.  <details>
-    <summary>Create a deployment named webapp using the image kodekloud/webapp-color with 3 replicas.</summary>
+    <summary>Create a deployment named nginx using the image nginx:latest with 3 replicas.</summary>
 
     ```
-    kubectl create deployment webapp --image=kodekloud/webapp-color --replicas=3
+    kubectl create deployment nginx --image=nginx:latest --replicas=3
     ```
     </details>
 
