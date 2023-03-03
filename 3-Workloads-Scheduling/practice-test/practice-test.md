@@ -32,6 +32,32 @@
    - ClusterRoleBinding: pvviewer-role-binding
    - Pod: pvviewer
    - Pod configured to use ServiceAccount pvviewer ?
+   Run the below command for solution: 
+
+     <details>
+
+     ```
+     kubectl create serviceaccount pvviewer
+     kubectl create clusterrole pvviewer-role --resource=persistentvolumes --verb=list
+     kubectl create clusterrolebinding pvviewer-role-binding --clusterrole=pvviewer-role --serviceaccount=default:pvviewer
+     ```
+
+     ```
+     apiVersion: v1
+     kind: Pod
+     metadata:
+       creationTimestamp: null
+       labels:
+         run: pvviewer
+       name: pvviewer
+     spec:
+       containers:
+       - image: redis
+         name: pvviewer
+         resources: {}
+       serviceAccountName: pvviewer
+     ```
+     </details>
 
 8. Taint the worker node node01 to be Unschedulable. Once done, create a pod called dev-redis, image redis:alpine, to ensure workloads are not scheduled to this worker node. Finally, create a new pod called prod-redis and image: redis:alpine with toleration to be scheduled on node01.
    key: env_type, value: production, operator: Equal and effect: NoSchedule
@@ -40,3 +66,40 @@
    - Effect = NoSchedule
    - pod 'dev-redis' (no tolerations) is not scheduled on node01?
    - Create a pod 'prod-redis' to run on node01
+   Run the below command for solution: 
+ 
+     <details>
+ 
+     ```
+     kubectl taint node node01 env_type=production:NoSchedule
+     ```
+
+     Deploy `dev-redis` pod and to ensure that workloads are not scheduled to this `node01` worker node.
+     ```
+     kubectl run dev-redis --image=redis:alpine
+
+     kubectl get pods -owide
+     ```
+
+     Deploy new pod `prod-redis` with toleration to be scheduled on `node01` worker node.
+     ```
+     apiVersion: v1
+     kind: Pod
+     metadata:
+       name: prod-redis
+     spec:
+       containers:
+       - name: prod-redis
+         image: redis:alpine
+       tolerations:
+       - effect: NoSchedule
+         key: env_type
+         operator: Equal
+         value: production     
+     ```
+
+     View the pods with short details: 
+     ```
+     kubectl get pods -owide | grep prod-redis
+     ```
+     </details>
