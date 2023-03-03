@@ -5,27 +5,64 @@
 
 2. Create a namespace named apx-x9984574.
 
-3. Create a service messaging-service to expose the messaging application within the cluster on port 6379.
-   - Service: messaging-service
-   - Port: 6379
-   - Type: ClusterIp
-   - Use the right labels
-
-4. Create a POD in the finance namespace named temp-bus with the image redis:alpine.
-   - Name: temp-bus
-   - Image Name: redis:alpine
-
-5. Create a new deployment called nginx-deploy, with image nginx:1.16 and 1 replica. Next upgrade the deployment to version 1.17 using rolling update.
+1. Create a new deployment called nginx-deploy, with image nginx:1.16 and 1 replica. Next upgrade the deployment to version 1.17 using rolling update.
    - Deployment : nginx-deploy. Image: nginx:1.16
    - Image: nginx:1.16
    - Task: Upgrade the version of the deployment to 1:17
    - Task: Record the changes for the image upgrade
 
-6. Create a new user called john. Grant him access to the cluster. John should have permission to create, list, get, update and delete pods in the development namespace .
+   Run the below command for solution:
+
+     <details>
+ 
+     For Kubernetes Version <=1.17
+ 
+     ```
+     kubectl run nginx-deploy --image=nginx:1.16 --replicas=1 --record
+     kubectl rollout history deployment nginx-deploy
+     kubectl set image deployment/nginx-deploy nginx=nginx:1.17 --record
+     kubectl rollout history deployment nginx-deploy
+     ```
+ 
+     For Kubernetes Version >1.17
+ 
+     ```
+     kubectl create deployment nginx-deploy --image=nginx:1.16 --dry-run=client -o yaml > deploy.yaml
+   
+     apiVersion: apps/v1
+     kind: Deployment
+     metadata:
+       name: nginx-deploy
+     spec:
+       replicas: 1
+       selector:
+         matchLabels:
+           app: nginx-deploy
+       strategy: {}
+       template:
+         metadata:
+           creationTimestamp: null
+           labels:
+             app: nginx-deploy
+         spec:
+           containers:
+           - image: nginx:1.16
+             name: nginx
+     ```
+     
+     ```
+     kubectl create -f deploy.yaml --record
+     kubectl rollout history deployment nginx-deploy
+     kubectl set image deployment/nginx-deploy nginx=nginx:1.17 --record
+     kubectl rollout history deployment nginx-deploy
+     ```
+     </details>
+
+2. Create a new user called john. Grant him access to the cluster. John should have permission to create, list, get, update and delete pods in the development namespace .
    - Role Name: developer, namespace: development, Resource: Pods
    - Access: User 'john' has appropriate permissions
 
-7. Create a new service account with the name pvviewer. Grant this Service account access to list all PersistentVolumes in the cluster by creating an appropriate cluster role called pvviewer-role and ClusterRoleBinding called pvviewer-role-binding.
+3. Create a new service account with the name pvviewer. Grant this Service account access to list all PersistentVolumes in the cluster by creating an appropriate cluster role called pvviewer-role and ClusterRoleBinding called pvviewer-role-binding.
    Next, create a pod called pvviewer with the image: redis and serviceAccount: pvviewer in the default namespace.
    - ServiceAccount: pvviewer
    - ClusterRole: pvviewer-role
@@ -60,7 +97,7 @@
      ```
      </details>
 
-8. Taint the worker node node01 to be Unschedulable. Once done, create a pod called dev-redis, image redis:alpine, to ensure workloads are not scheduled to this worker node. Finally, create a new pod called prod-redis and image: redis:alpine with toleration to be scheduled on node01.
+4. Taint the worker node node01 to be Unschedulable. Once done, create a pod called dev-redis, image redis:alpine, to ensure workloads are not scheduled to this worker node. Finally, create a new pod called prod-redis and image: redis:alpine with toleration to be scheduled on node01.
    key: env_type, value: production, operator: Equal and effect: NoSchedule
    - Key = env_type
    - Value = production
