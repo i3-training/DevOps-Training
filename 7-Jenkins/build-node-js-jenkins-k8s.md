@@ -6,7 +6,7 @@ Run the Jenkins service file. The first time it asks for an adminpassword which 
 Then in the next step install suggested plugins.
 After installing, the dashboard opens up. Go to Manage Jenkins and select Manage Plugins.
 
-## - Install plugins for Nodejs, Docker, Kubernetes, and GitHub.
+## - Install plugins for Nodejs, Docker.
 1. Click button manage jenkins
 2. Click manage plugins
 <img width="1280" alt="1" src="https://user-images.githubusercontent.com/22531977/223068275-5b28f2a2-cd5f-44cd-a6f4-da62c1e1b6d5.png">
