@@ -14,8 +14,11 @@ and then search on menu available plugins "docker" click install without restart
 <img width="1280" alt="2" src="https://user-images.githubusercontent.com/22531977/223071224-12c7a5b0-28f2-4848-af41-52c843c671dc.png">
 next search on menu available plugins "nodejs" click install without restart 
 <img width="1280" alt="3" src="https://user-images.githubusercontent.com/22531977/223071613-bfcb8612-ffc1-4796-92d7-9e6d50d3fae9.png">
-
-3. Go to Dashboard > manage jenkins > manage credentials to setup username and password github (repo source code) and dockerhub credentials
+3. Go to dashboard > manage jenkins > global tool configuration, to setting docker installation & nodejs installation
+<img width="1280" alt="global" src="https://user-images.githubusercontent.com/22531977/223088074-39f61654-c3dc-4487-bb05-5dd31b289309.png">
+<img width="1280" alt="docker" src="https://user-images.githubusercontent.com/22531977/223088143-30ee2148-985b-4afc-920c-5857c07a62f8.png">
+<img width="1280" alt="nodejs" src="https://user-images.githubusercontent.com/22531977/223088151-0fe34615-7c61-464a-801b-7cfa17dea685.png">
+4. Go to Dashboard > manage jenkins > manage credentials to setup username and password github (repo source code) and dockerhub credentials
 <img width="1280" alt="4" src="https://user-images.githubusercontent.com/22531977/223073585-52206202-85e8-4a0f-86e1-29e72a4b28ed.png">
 Click add credentials
 <img width="1280" alt="5" src="https://user-images.githubusercontent.com/22531977/223077589-c6a93eac-fdd0-4631-b560-93762052e89c.png">
