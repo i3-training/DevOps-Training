@@ -50,8 +50,9 @@ Apply and save your project configuration.
 ## 3. Run Your Pipeline
 <img width="1280" alt="5" src="https://user-images.githubusercontent.com/22531977/223300337-fc78c606-7238-4056-99ad-ed2378e988d2.png">
 <img width="1280" alt="6" src="https://user-images.githubusercontent.com/22531977/223300345-eeeaa1db-a39a-4dd0-b8f3-07c1584006c6.png">
+<img width="1280" alt="image" src="https://user-images.githubusercontent.com/22531977/223300991-731b84e6-b2ac-40e7-921c-a88af96f9191.png">
+
 
 
 After you save the project configuration you will be redirected to project overview, Select Build Now to run the project, when project is running you can inspect build process and find details regarding build itself, from here you can troubleshot if theres issue during build, image below show of how build process running and its logs.
 
-![Running Pipeline](../../images/jenkins-freestyle-5.gif)
