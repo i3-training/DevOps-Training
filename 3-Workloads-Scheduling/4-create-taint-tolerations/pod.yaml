@@ -8,3 +8,8 @@ spec:
   - image: nginx
     name: nginx
   restartPolicy: Never
+  tolerations:
+  - key: "app"
+    operator: "Equal"
+    value: "red"
+    effect: "NoSchedule"

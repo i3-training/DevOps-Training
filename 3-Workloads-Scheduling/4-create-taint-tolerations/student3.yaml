@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: student1
+  namespace: training
+spec:
+  containers:
+  - image: nginx
+    name: student3
+  restartPolicy: Never
+#  tolerations:
+#  - key: "app"
+#    operator: "Equal"
+#    value: "red"
+#    effect: "NoSchedule"
