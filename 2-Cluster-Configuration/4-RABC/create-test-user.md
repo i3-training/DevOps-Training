@@ -1,19 +1,23 @@
-kubectl create serviceaccount imboyy
+```sh
+kubectl create serviceaccount student
 
 kubectl apply -f - <<EOF
 apiVersion: v1
 kind: Secret
 metadata:
-  name: imboyy-secret
+  name: student-secret
   annotations:
-    kubernetes.io/service-account.name: imboyy
+    kubernetes.io/service-account.name: student
 type: kubernetes.io/service-account-token
 EOF
-
+```
+```sh
 TOKEN=$(kubectl describe secret imboyy-secret | grep token: | awk '{print $2}')
 echo $TOKEN
-
-kubectl config set-credentials imboyy --token=$TOKEN
-kubectl config set-context imboyy --cluster=kubernetes --user=imboyy
+```
+```sh
+kubectl config set-credentials student --token=$TOKEN
+kubectl config set-context student --cluster=kubernetes --user=imboyy
 kubectl config current-context
-kubectl config use-context imboyy
+kubectl config use-context student
+```
