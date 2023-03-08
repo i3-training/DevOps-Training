@@ -2,12 +2,12 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   namespace: default
-  name: ImboyyRoleBinding
+  name: studentRoleBinding
 subjects:
   - kind: ServiceAccount
-    name: imboyy
+    name: student
     apiGroup: ""
 roleRef:
   kind: Role
-  name: imboyy
+  name: student
   apiGroup: ""
