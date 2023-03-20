@@ -5,9 +5,9 @@ metadata:
   name: studentRoleBinding
 subjects:
   - kind: ServiceAccount
-    name: student
+    name: demo
     apiGroup: ""
 roleRef:
   kind: Role
-  name: student
+  name: demo
   apiGroup: ""

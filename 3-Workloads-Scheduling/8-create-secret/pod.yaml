@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: backend
-  namespace: training
+  namespace: default
 spec:
   containers:
   - image: nginx

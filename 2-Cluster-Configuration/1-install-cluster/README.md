@@ -1,6 +1,4 @@
 ## Installation Kubernetes
-Master: A Kubernetes Master is where control API calls for the pods, replications controllers, services, nodes and other components of a Kubernetes cluster are executed.
-Node: A Node is a system that provides the run-time environments for the containers. A set of container pods can span multiple nodes.
 1. Install Kubernetes Cluster on Ubuntu 20.04
    ```sh
    sudo apt update
@@ -72,7 +70,7 @@ Node: A Node is a system that provides the run-time environments for the contain
     sudo systemctl enable docker
    ```
 5. Install Mirantis cri-dockerd as Docker Engine shim for Kubernetes
-   Install cri-dockerd using ready binary
+   Install cri-dockerd using ready binary.
    ```sh
    sudo apt update
    sudo apt install git wget curl

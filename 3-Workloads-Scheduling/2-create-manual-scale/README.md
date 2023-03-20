@@ -1,18 +1,16 @@
-# kubectl scale Use Cases
+# Kubectl scale Use Cases
 The kubectl scale command is used to change the number of running replicas inside Kubernetes deployment, replica set, replication controller, and stateful set objects. When you increase the replica count, Kubernetes will start new pods to scale up your service. Lowering the replica count will cause Kubernetes to gracefully terminate some pods, freeing up cluster resources.
 
 You can run kubectl scale to manually adjust your application’s replica count in response to changing service capacity requirements. Increased traffic loads can be handled by increasing the replica count, providing more application instances to serve user traffic. When the surge subsides, the number of replicas can be reduced. This helps keep your costs low by avoiding utilization of unneeded resources.
 
-# Using kubectl
+## Using kubectl
 The most basic usage of kubectl scale looks like this:
-
 ```sh
 $ kubectl scale --replicas=3 deployment/demo-deployment
 Executing this command will adjust the deployment called demo-deployment so it has three running replicas. You can target a different kind of resource by substituting its name instead of deployment:
 ```
-# Basic Scaling
+## Basic Scaling
 Now we’ll look at a complete example of using kubectl scale to scale a deployment. Here’s a YAML file defining a simple deployment:
-
 ```sh
 apiVersion: apps/v1
 kind: Deployment

@@ -1,4 +1,5 @@
-Before you can get started using secrets, you first need to create a secret. As you may expect, this can be done by defining an object of kind Secret:
+## Solution
+Before you can get started using secrets, you first need to create a secret. As you may expect, this can be done by defining an object of kind Secret, name it mysecret.yaml:
 ```sh
 apiVersion: v1
 kind: Secret
@@ -9,10 +10,8 @@ data:
   username: bXl1c2VybmFtZQo= #Base64 encoded value of "myusername"
   password: bXlwYXNzd29yZAo= #Base64 encoded value of "mypassword"
 ```
-Secrets in Kubernetes are, at their most basic form, a collection of keys and values. The above example creates a secret named mysecret with two keys: username and password. There’s one very important thing to note though, which is that the values of these key/value pairs are encoded as base64. Remember that base64 is an encoding algorithm, not an encryption algorithm. This is done to help facilitate data that may not be entirely alpha-numeric, and instead could include binary data, non-ASCII data, etc. You apply can this YAML as you would if you were creating any other Kubernetes object:
-```sh
-kubectl apply -f https://raw.githubusercontent.com/i3-training/DevOps-Training/main/3-Workloads-Scheduling/8-create-secret/create-secret/secret/secret/secret.yaml
-```
+Secrets in Kubernetes are, at their most basic form, a collection of keys and values. The above example creates a secret named mysecret with two keys: username and password. There’s one very important thing to note though, which is that the values of these key/value pairs are encoded as base64. Remember that base64 is an encoding algorithm, not an encryption algorithm. This is done to help facilitate data that may not be entirely alpha-numeric, and instead could include binary data, non-ASCII data, etc.
+
 Once applied, you can see that while you can get the secret with kubectl, it avoids printing the values of each key by default:
 ```sh
 $ kubectl describe secret mysecret

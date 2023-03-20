@@ -1,66 +1,55 @@
-The simplest way to create a ConfigMap is to store a bunch of key-value strings in a ConfigMap YAML file and inject them as environment variables into your Pods.
+# Solution
 
-Creating a ConfigMap
-This YAML creates a ConfigMap with the value database set to mongodb, and database_uri, and keys set to the values in the YAML example code.
+Create the ConfigMap and point to the text file upon creation.
 
-Then, create the ConfigMap in the cluster using kubectl apply -f config-map.yaml.
-```sh
-kind: ConfigMap 
-apiVersion: v1 
-metadata:
-  name: example-configmap 
-data:
-  # Configuration values can be set as key-value properties
-  database: mongodb
-  database_uri: mongodb://localhost:27017
-  
-  # Or set as complete file contents (even JSON!)
-  keys: | 
-    image.public.key=771 
-    rsa.public.key=42
 ```
-Using a ConfigMap in Environment Variables
-The key to adding your ConfigMap as environment variables to your pods is the envFrom property in your Pod’s YAML.
+$ kubectl create configmap db-config --from-env-file=config.txt
+configmap/db-config created
+$ kubectl run backend --image=nginx -o yaml --dry-run=client --restart=Never > pod.yaml
+```
 
-Set envFrom to a reference to the ConfigMap you’ve created.
-```sh
-kind: Pod 
-apiVersion: v1 
+The final YAML file should look similar to the following code snippet.
+
+```yaml
+apiVersion: v1
+kind: Pod
 metadata:
-  name: pod-env-var 
+  creationTimestamp: null
+  labels:
+    run: backend
+  name: backend
 spec:
   containers:
-    - name: env-var-configmap
-      image: nginx:1.7.9 
-      envFrom:
-        - configMapRef:
-            name: example-configmap
+  - image: nginx
+    name: backend
+    envFrom:
+      - configMapRef:
+          name: db-config
+    resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Never
+status: {}
 ```
-After you’ve created the Pod, you’ll be able to access these environment variables.
-```sh
-$ kubectl apply -f pod-env-var.yaml
-pod "pod-env-var" created
 
-$ kubectl exec -it pod-env-var sh
+Create the Pod by pointing the `create` command to the YAML file.
+
+```
+$ kubectl create -f pod.yaml
+```
+
+Log into the Pod and run the `env` command.
+
+```
+$ kubectl exec backend -it -- /bin/sh
 # env
-# ...
-KUBERNETES_SERVICE_PORT=443
-KUBERNETES_PORT=tcp://10.96.0.1:443
-database=mongodb
-HOSTNAME=pod-env-var
-database_uri=mongodb://localhost:27017
-HOME=/root
-keys=image.public.key=771 
-rsa.public.key=42
-
-TERM=xterm
-KUBERNETES_PORT_443_TCP_ADDR=10.96.0.1
-NGINX_VERSION=1.7.9-1~wheezy
-PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-KUBERNETES_PORT_443_TCP_PORT=443
-KUBERNETES_PORT_443_TCP_PROTO=tcp
-KUBERNETES_PORT_443_TCP=tcp://10.96.0.1:443
-KUBERNETES_SERVICE_PORT_HTTPS=443
-KUBERNETES_SERVICE_HOST=10.96.0.1
+DB_URL=localhost:3306
+DB_USERNAME=postgres
+...
+# exit
 ```
 
+## Optional
+
+> How would you approach hot reloading of values defined by a ConfigMap consumed by an application running in Pod?
+
+Changes to environment variables are only reflected if the Pod is restarted. Alternatively, you can mount a ConfigMap as file and poll changes from the mounted file periodically, however, it requires the application to build in the logic.

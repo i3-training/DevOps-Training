@@ -4,7 +4,7 @@ metadata:
   labels:
     run: backend
   name: backend
-  namespace: training
+  namespace: default
 spec:
   containers:
   - image: nginx

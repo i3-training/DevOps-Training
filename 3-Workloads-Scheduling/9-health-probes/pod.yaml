@@ -4,7 +4,7 @@ metadata:
   labels:
     run: hello
   name: hello
-  namespace: training
+  namespace: default
 spec:
   containers:
   - image: bmuschko/nodejs-hello-world:1.0.0
