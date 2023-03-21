@@ -106,7 +106,7 @@ Pod Template:
   Volumes:	<none>
 ```
 
-## Optional
+# Optional
 
 > Can you foresee potential issues with a rolling deployment?
 
